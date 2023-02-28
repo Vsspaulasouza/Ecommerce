@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "test:pre-commit": "vitest run",
+    "lint": "eslint .",
   },
   "dependencies": {
     "localforage": "^1.10.0",
