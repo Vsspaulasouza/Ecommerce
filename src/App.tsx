@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
@@ -18,7 +19,9 @@ export function WrappedApp() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={client}>
-        <App />
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
       </QueryClientProvider>
     </BrowserRouter>
   );
