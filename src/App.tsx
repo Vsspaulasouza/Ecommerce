@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
@@ -11,10 +12,14 @@ export function App() {
   );
 }
 
+const client = new QueryClient();
+
 export function WrappedApp() {
   return (
     <BrowserRouter>
-      <App />
+      <QueryClientProvider client={client}>
+        <App />
+      </QueryClientProvider>
     </BrowserRouter>
   );
 }
