@@ -6,11 +6,13 @@ import '@fontsource/open-sans';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import theme from './theme';
+import Product from './pages/Product';
 
 export function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/product/:productId" element={<Product />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

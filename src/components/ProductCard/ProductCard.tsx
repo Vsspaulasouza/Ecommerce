@@ -1,5 +1,6 @@
-import { Box, Link, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { Rate } from 'antd';
+import { Link as RouterLink } from 'react-router-dom';
 
 interface ProductCardProps {
   product: Product;
@@ -65,6 +66,8 @@ function ProductCard({ product }: ProductCardProps) {
           })}
         </Heading>
         <Link
+          as={RouterLink}
+          to={`product/${product.id}`}
           href=" "
           p="12px"
           borderRadius="12px"
