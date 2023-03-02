@@ -1,5 +1,6 @@
-import { Box, Heading, Image, Link, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Text } from '@chakra-ui/react';
 import { Rate } from 'antd';
+import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 
 interface ProductCardProps {
@@ -65,22 +66,24 @@ function ProductCard({ product }: ProductCardProps) {
             currency: 'USD',
           })}
         </Heading>
-        <Link
-          as={RouterLink}
-          to={`product/${product.id}`}
-          href=" "
-          p="12px"
-          borderRadius="12px"
-          backgroundColor="green.300"
-          border="2px solid"
-          borderColor="green.300"
-          fontWeight="700"
-          fontSize="15px"
-          color="white"
-          _hover={{ textDecor: 'none' }}
-        >
-          Buy now
-        </Link>
+        <RouterLink to={`product/${product.id}`}>
+          <Text
+            p="12px"
+            borderRadius="12px"
+            backgroundColor="green.300"
+            border="2px solid"
+            borderColor="green.100"
+            fontWeight="700"
+            fontSize="15px"
+            color="white"
+            _hover={{ textDecor: 'none' }}
+            as={motion.div}
+            whileHover={{ scale: 0.9 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            Buy now
+          </Text>
+        </RouterLink>
       </Box>
     </Box>
   );
