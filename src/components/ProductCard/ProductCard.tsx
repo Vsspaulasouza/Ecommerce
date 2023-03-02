@@ -28,16 +28,20 @@ function ProductCard({ product }: ProductCardProps) {
         alignSelf="center"
         mb="16px"
       />
-      <Heading
-        as="h2"
-        fontSize="15px"
-        fontWeight="500"
-        lineHeight="22px"
-        color="black.font.title"
-        mb="4px"
-      >
-        {product.title}
-      </Heading>
+      <RouterLink to={`product/${product.id}`}>
+        <Heading
+          as="h2"
+          fontSize="15px"
+          fontWeight="500"
+          lineHeight="22px"
+          color="black.font.title"
+          mb="4px"
+          cursor="pointer"
+          _hover={{ textDecor: 'underline' }}
+        >
+          {product.title}
+        </Heading>
+      </RouterLink>
       <Text
         fontSize="12px"
         lineHeight="16px"
