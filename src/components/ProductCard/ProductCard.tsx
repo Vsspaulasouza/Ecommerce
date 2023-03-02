@@ -27,6 +27,7 @@ function ProductCard({ product }: ProductCardProps) {
         boxSize="180px"
         alignSelf="center"
         mb="16px"
+        draggable={false}
       />
       <RouterLink to={`product/${product.id}`}>
         <Heading
