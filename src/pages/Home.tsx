@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
+import { Box, Grid, Heading } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import ProductCard from '../components/ProductCard/ProductCard';
 
