@@ -1,4 +1,4 @@
-import { Box, Grid, Heading } from '@chakra-ui/react';
+import { Box, Grid, Heading, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import ProductCard from '../components/ProductCard/ProductCard';
 
@@ -54,9 +54,9 @@ function Home() {
     getProducts
   );
 
-  if (status === 'loading') return 'Loading...';
+  if (status === 'loading') return <Text>Loading...</Text>;
 
-  if (error) return `An error has occurred:  ${error.message}`;
+  if (error) return <Text>{`An error has occurred:  ${error.message}`}</Text>;
 
   return (
     <Box display="flex" flexDir="column">
