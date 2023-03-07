@@ -11,7 +11,7 @@ function ProductCard({ product }: ProductCardProps) {
   return (
     <Box
       maxW="270px"
-      h="420px"
+      h="450px"
       borderRadius="12px"
       display="flex"
       flexDir="column"
@@ -20,6 +20,7 @@ function ProductCard({ product }: ProductCardProps) {
       backgroundColor="white"
       border="1px solid"
       borderColor="gray.100"
+      justifyContent="space-between"
     >
       <Image
         src={product.image}
@@ -40,7 +41,7 @@ function ProductCard({ product }: ProductCardProps) {
           cursor="pointer"
           _hover={{ textDecor: 'underline' }}
         >
-          {product.title}
+          {`${product.title.substring(0, 50)}...`}
         </Heading>
       </RouterLink>
       <Text
