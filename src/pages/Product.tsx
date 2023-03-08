@@ -1,20 +1,26 @@
-function Product() {
-  const products = [
-    {
-      id: 1,
-      title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-      price: 109.95,
-      description:
-        'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-      category: "men's clothing",
-      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-      rating: {
-        rate: 3.9,
-        count: 120,
-      },
-    },
-  ];
-  return <div>Product</div>;
+import { Text } from '@chakra-ui/react';
+import { UseQueryResult } from 'react-query';
+import { useParams } from 'react-router-dom';
+
+interface ProductProps {
+  queryResult: UseQueryResult<Product[], Error>;
+}
+
+function Product({ queryResult }: ProductProps) {
+  const { productId } = useParams();
+
+  if (queryResult.error)
+    return (
+      <Text>{`An error has occurred:  ${queryResult.error.message}`}</Text>
+    );
+
+  if (!productId) return <Text>Produto sem id</Text>;
+
+  const thisProduct = queryResult.data?.find(
+    (prod) => prod.id === parseInt(productId, 10)
+  );
+
+  return <div>Product {thisProduct?.title}</div>;
 }
 
 export default Product;

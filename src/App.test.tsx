@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { App, WrappedApp } from './App';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { App } from './App';
 
 describe('App', () => {
   // it('Renders hello world', () => {
@@ -16,9 +17,12 @@ describe('App', () => {
   //   ).toHaveTextContent('Hello World');
   // });
   it('Renders not found if invalid path', () => {
+    const client = new QueryClient();
     render(
       <MemoryRouter initialEntries={['/this-route-does-not-exist']}>
-        <App />
+        <QueryClientProvider client={client}>
+          <App />
+        </QueryClientProvider>
       </MemoryRouter>
     );
     expect(
