@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import { Box, ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import '@fontsource/poppins';
 import '@fontsource/open-sans';
 import Home from './pages/Home';
@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import theme from './theme';
 import Product from './pages/Product';
 import { isProductArray } from './utils/ProductUtil';
+import Header from './components/Header/Header';
 
 function App() {
   async function getProducts() {
@@ -27,14 +28,17 @@ function App() {
   );
 
   return (
-    <Routes>
-      <Route path="/" element={<Home queryResult={queryResult} />} />
-      <Route
-        path="/product/:productId"
-        element={<Product queryResult={queryResult} />}
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Box display="flex" flexDir="column">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home queryResult={queryResult} />} />
+        <Route
+          path="/product/:productId"
+          element={<Product queryResult={queryResult} />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Box>
   );
 }
 

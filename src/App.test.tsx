@@ -27,7 +27,7 @@ describe('App', () => {
     );
     expect(
       screen.getByRole('heading', {
-        level: 1,
+        level: 2,
       })
     ).toHaveTextContent('Not Found');
   });
