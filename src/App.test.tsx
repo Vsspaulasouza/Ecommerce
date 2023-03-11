@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider as ReduxProvider } from 'react-redux';
 import { App } from './App';
+import store from './store/store';
 
 describe('App', () => {
   // it('Renders hello world', () => {
@@ -21,7 +23,9 @@ describe('App', () => {
     render(
       <MemoryRouter initialEntries={['/this-route-does-not-exist']}>
         <QueryClientProvider client={client}>
-          <App />
+          <ReduxProvider store={store}>
+            <App />
+          </ReduxProvider>
         </QueryClientProvider>
       </MemoryRouter>
     );

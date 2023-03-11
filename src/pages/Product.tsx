@@ -1,24 +1,22 @@
 import { Box, Heading, Image, Text } from '@chakra-ui/react';
 import { Rate } from 'antd';
 import { motion } from 'framer-motion';
-import { UseQueryResult } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../store/store';
 
-interface ProductProps {
-  queryResult: UseQueryResult<Product[], Error>;
-}
-
-function Product({ queryResult }: ProductProps) {
+function Product() {
   const { productId } = useParams();
 
-  if (queryResult.error)
+  const productsState = useAppSelector((state) => state.products);
+
+  if (productsState.error)
     return (
-      <Text>{`An error has occurred:  ${queryResult.error.message}`}</Text>
+      <Text>{`An error has occurred:  ${productsState.error.message}`}</Text>
     );
 
   if (!productId) return <Text>Produto sem id</Text>;
 
-  const thisProduct = queryResult.data?.find(
+  const thisProduct = productsState.products.find(
     (prod) => prod.id === parseInt(productId, 10)
   );
 

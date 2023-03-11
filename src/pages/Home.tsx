@@ -1,17 +1,15 @@
 import { Grid, Text } from '@chakra-ui/react';
-import { UseQueryResult } from 'react-query';
 import ProductCard from '../components/ProductCard/ProductCard';
+import { useAppSelector } from '../store/store';
 
-interface HomeProps {
-  queryResult: UseQueryResult<Product[], Error>;
-}
+function Home() {
+  const productsState = useAppSelector((state) => state.products);
 
-function Home({ queryResult }: HomeProps) {
-  if (queryResult.status === 'loading') return <Text>Loading...</Text>;
+  if (productsState.loading) return <Text>Loading...</Text>;
 
-  if (queryResult.error)
+  if (productsState.error)
     return (
-      <Text>{`An error has occurred:  ${queryResult.error.message}`}</Text>
+      <Text>{`An error has occurred:  ${productsState.error.message}`}</Text>
     );
 
   return (
@@ -21,7 +19,7 @@ function Home({ queryResult }: HomeProps) {
       p="64px 34px"
       justifyContent="center"
     >
-      {queryResult.data?.map((product) => (
+      {productsState.products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </Grid>
