@@ -38,7 +38,9 @@ function App() {
     return products;
   }
 
-  useQuery<Product[], Error>(['products', { id: 1 }], getProducts);
+  useQuery<Product[], Error>(['products', { id: 1 }], getProducts, {
+    staleTime: 1000 * 60 * 5,
+  });
 
   return (
     <Box display="flex" flexDir="column">
