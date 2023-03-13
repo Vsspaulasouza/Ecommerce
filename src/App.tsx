@@ -15,7 +15,7 @@ import {
   LoadProductsError,
   loadProductsRequest,
   loadProductsSuccess,
-} from './store/products/productsSlice';
+} from './store/productsSlice';
 import Checkout from './pages/Checkout';
 
 function App() {
