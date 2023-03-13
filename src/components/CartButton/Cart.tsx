@@ -10,8 +10,9 @@ import {
   PopoverHeader,
   PopoverTrigger,
 } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
-function CartButton() {
+function Cart() {
   return (
     <Popover>
       <PopoverTrigger>
@@ -27,11 +28,13 @@ function CartButton() {
         </PopoverHeader>
         <PopoverBody>Content</PopoverBody>
         <PopoverFooter>
-          <Button>Checkout</Button>
+          <RouterLink to="/checkout">
+            <Button>Checkout</Button>
+          </RouterLink>
         </PopoverFooter>
       </PopoverContent>
     </Popover>
   );
 }
 
-export default CartButton;
+export default Cart;

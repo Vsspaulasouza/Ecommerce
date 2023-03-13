@@ -1,6 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import CartButton from '../CartButton/CartButton';
+import Cart from '../CartButton/Cart';
 
 function Header() {
   return (
@@ -16,7 +16,7 @@ function Header() {
           eCommerce
         </Heading>
       </RouterLink>
-      <CartButton />
+      <Cart />
     </Box>
   );
 }

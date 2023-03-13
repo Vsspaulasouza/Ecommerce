@@ -16,6 +16,7 @@ import {
   loadProductsRequest,
   loadProductsSuccess,
 } from './store/products/productsSlice';
+import Checkout from './pages/Checkout';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:productId" element={<Product />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Box>
