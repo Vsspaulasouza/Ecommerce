@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 function isProduct(product: unknown): product is Product {
   if (
     product &&
@@ -36,8 +34,8 @@ function isProductArray(products: unknown): products is Product[] {
   return false;
 }
 
-function productInArray(product: Product, array: Product[]) {
-  return array.findIndex((item) => _.isEqual(product, item));
+function productInArray(product: Product, array: ProductCart[]) {
+  return array.findIndex((item) => product.id === item.product.id);
 }
 
 export { isProduct, isProductArray, productInArray };

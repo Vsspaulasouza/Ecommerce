@@ -12,3 +12,8 @@ interface Product {
   image: string;
   rating: Rating;
 }
+
+interface ProductCart {
+  product: Product;
+  quantity: number;
+}
