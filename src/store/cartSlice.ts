@@ -28,6 +28,27 @@ const cartSlice = createSlice({
       }
       return state;
     },
+    increaseQuantityOfProduct: (
+      state,
+      action: PayloadAction<{ productCart: ProductCart; plusQuantity: number }>
+    ) => {
+      const index = productInArray(
+        action.payload.productCart.product,
+        state.products
+      );
+      if (index !== -1) {
+        const { products } = state;
+        products[index].quantity += action.payload.plusQuantity;
+
+        let { amount } = state;
+        amount +=
+          action.payload.productCart.product.price *
+          action.payload.plusQuantity;
+
+        return { ...state, products, amount };
+      }
+      return state;
+    },
     addOneQuantityOfProduct: (state, action: PayloadAction<ProductCart>) => {
       const index = productInArray(action.payload.product, state.products);
       if (index !== -1) {
