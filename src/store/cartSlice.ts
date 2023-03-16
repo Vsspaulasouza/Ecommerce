@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import _ from 'lodash';
 import { productInArray } from '../utils/ProductUtil';
 
 interface ProductsState {
@@ -16,74 +17,67 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addProductToCart: (state, action: PayloadAction<ProductCart>) => {
-      if (productInArray(action.payload.product, state.products) === -1) {
-        const { products } = state;
-        products.push(action.payload);
-
-        let { amount } = state;
-        amount += action.payload.product.price * action.payload.quantity;
-
-        return { ...state, products, amount };
-      }
-      return state;
-    },
-    increaseQuantityOfProduct: (
+    addProductToCart: (
       state,
-      action: PayloadAction<{ productCart: ProductCart; plusQuantity: number }>
-    ) => {
-      const index = productInArray(
-        action.payload.productCart.product,
-        state.products
-      );
+      action: PayloadAction<ProductCart>
+    ): ProductsState => {
+      const newState = _.cloneDeep(state);
+      const index = productInArray(action.payload.product, state.products);
+
+      if (index === -1) {
+        newState.products.push(action.payload);
+        newState.amount +=
+          action.payload.product.price * action.payload.quantity;
+        return newState;
+      }
+
+      newState.products[index].quantity += action.payload.quantity;
+      newState.amount += action.payload.product.price * action.payload.quantity;
+      return newState;
+    },
+    addOneQuantityOfProduct: (
+      state,
+      action: PayloadAction<ProductCart>
+    ): ProductsState => {
+      const index = productInArray(action.payload.product, state.products);
       if (index !== -1) {
-        const { products } = state;
-        products[index].quantity += action.payload.plusQuantity;
+        const newState = _.cloneDeep(state);
 
-        let { amount } = state;
-        amount +=
-          action.payload.productCart.product.price *
-          action.payload.plusQuantity;
+        newState.products[index].quantity += 1;
+        newState.amount += action.payload.product.price;
 
-        return { ...state, products, amount };
+        return newState;
       }
       return state;
     },
-    addOneQuantityOfProduct: (state, action: PayloadAction<ProductCart>) => {
+    removeOneQuantityOfProduct: (
+      state,
+      action: PayloadAction<ProductCart>
+    ): ProductsState => {
       const index = productInArray(action.payload.product, state.products);
       if (index !== -1) {
-        const { products } = state;
-        products[index].quantity += 1;
+        const newState = _.cloneDeep(state);
 
-        let { amount } = state;
-        amount += action.payload.product.price;
+        newState.products[index].quantity -= 1;
+        newState.amount -= action.payload.product.price;
 
-        return { ...state, products, amount };
+        return newState;
       }
       return state;
     },
-    removeOneQuantityOfProduct: (state, action: PayloadAction<ProductCart>) => {
+    removeProductInCart: (
+      state,
+      action: PayloadAction<ProductCart>
+    ): ProductsState => {
       const index = productInArray(action.payload.product, state.products);
       if (index !== -1) {
-        const { products } = state;
-        products[index].quantity -= 1;
+        const newState = _.cloneDeep(state);
 
-        let { amount } = state;
-        amount -= action.payload.product.price;
+        newState.amount -=
+          state.products[index].product.price * state.products[index].quantity;
+        newState.products.splice(index);
 
-        return { ...state, products, amount };
-      }
-      return state;
-    },
-    removeProductInCart: (state, action: PayloadAction<ProductCart>) => {
-      const index = productInArray(action.payload.product, state.products);
-      if (index !== -1) {
-        const { products } = state;
-        let { amount } = state;
-        amount -= products[index].product.price * products[index].quantity;
-
-        products.splice(index);
-        return { ...state, products, amount };
+        return newState;
       }
       return state;
     },
