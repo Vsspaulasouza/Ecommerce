@@ -1,13 +1,23 @@
 import { Box, Heading, Image, Text } from '@chakra-ui/react';
-import { Rate } from 'antd';
+import { InputNumber, Rate } from 'antd';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../store/store';
+import { addProductToCart } from '../store/cartSlice';
+import { useAppSelector, useAppDispatch } from '../store/store';
 
 function Product() {
   const { productId } = useParams();
 
   const productsState = useAppSelector((state) => state.products);
+
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const onChange = (value: number | null) => {
+    if (value) setQuantity(value);
+  };
+
+  const dispatch = useAppDispatch();
 
   if (productsState.error)
     return (
@@ -21,6 +31,10 @@ function Product() {
   );
 
   if (!thisProduct) return <Text>Produto não encontrado</Text>;
+
+  const onClick = () => {
+    dispatch(addProductToCart({ product: thisProduct, quantity }));
+  };
 
   return (
     <Box display="flex" padding="50px 42px" gap="50px" justifyContent="center">
@@ -78,6 +92,20 @@ function Product() {
               currency: 'USD',
             })}
           </Heading>
+          <InputNumber
+            value={quantity}
+            onChange={onChange}
+            min={1}
+            max={999}
+            defaultValue={1}
+            addonBefore="Qtd"
+            size="large"
+            style={{
+              maxWidth: '120px',
+              marginRight: '24px',
+              textAlign: 'center',
+            }}
+          />
           <Text
             p="12px"
             borderRadius="12px"
@@ -92,6 +120,7 @@ function Product() {
             whileHover={{ scale: 0.9 }}
             whileTap={{ scale: 0.9 }}
             cursor="pointer"
+            onClick={onClick}
           >
             Buy now
           </Text>
