@@ -32,7 +32,7 @@ function Cart() {
             Cart
           </Heading>
         </PopoverHeader>
-        <PopoverBody>
+        <PopoverBody display="flex" flexDir="column" gap="10px">
           {cartState.products.map((productCart) => (
             <ProductCart
               key={productCart.product.id}
@@ -40,24 +40,7 @@ function Cart() {
             />
           ))}
         </PopoverBody>
-        <PopoverFooter
-          display="flex"
-          justifyContent="space-between"
-          p="8px 24px"
-        >
-          <Heading
-            as="p"
-            fontWeight="600"
-            fontSize="20px"
-            lineHeight="39px"
-            color="black.font.title"
-            mr="24px"
-          >
-            {cartState.amount.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'USD',
-            })}
-          </Heading>
+        <PopoverFooter display="flex" p="10px 24px" justifyContent="flex-end">
           <RouterLink to="/checkout">
             <Button rightIcon={<BiRightArrowAlt />}>Checkout</Button>
           </RouterLink>
