@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, useToast } from '@chakra-ui/react';
 import { InputNumber, Rate } from 'antd';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -19,6 +19,8 @@ function Product() {
 
   const dispatch = useAppDispatch();
 
+  const toast = useToast();
+
   if (productsState.error)
     return (
       <Text>{`An error has occurred:  ${productsState.error.message}`}</Text>
@@ -34,6 +36,13 @@ function Product() {
 
   const onClick = () => {
     dispatch(addProductToCart({ product: thisProduct, quantity }));
+    toast({
+      title: 'Product added to cart',
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+      position: 'top',
+    });
   };
 
   return (
