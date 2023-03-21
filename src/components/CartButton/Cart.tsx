@@ -13,6 +13,7 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { BiRightArrowAlt } from 'react-icons/bi';
+import { Empty } from 'antd';
 import { useAppSelector } from '../../store/store';
 import ProductCart from '../ProductCart/ProductCart';
 
@@ -33,12 +34,19 @@ function Cart() {
           </Heading>
         </PopoverHeader>
         <PopoverBody display="flex" flexDir="column" gap="10px">
-          {cartState.products.map((productCart) => (
-            <ProductCart
-              key={productCart.product.id}
-              productCart={productCart}
+          {cartState.products.length === 0 ? (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="No products in cart"
             />
-          ))}
+          ) : (
+            cartState.products.map((productCart) => (
+              <ProductCart
+                key={productCart.product.id}
+                productCart={productCart}
+              />
+            ))
+          )}
         </PopoverBody>
         <PopoverFooter display="flex" p="10px 24px" justifyContent="flex-end">
           <RouterLink to="/checkout">

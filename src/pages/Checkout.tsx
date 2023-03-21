@@ -1,4 +1,5 @@
 import { Box, Heading } from '@chakra-ui/react';
+import { Empty } from 'antd';
 import ProductCart from '../components/ProductCart/ProductCart';
 import { useAppSelector } from '../store/store';
 
@@ -16,9 +17,16 @@ function Checkout() {
       flexDir="column"
       gap="10px"
     >
-      {cartState.products.map((productCart) => (
-        <ProductCart key={productCart.product.id} productCart={productCart} />
-      ))}
+      {cartState.products.length === 0 ? (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="No products in cart"
+        />
+      ) : (
+        cartState.products.map((productCart) => (
+          <ProductCart key={productCart.product.id} productCart={productCart} />
+        ))
+      )}
       <Box
         display="flex"
         justifyContent="space-between"
