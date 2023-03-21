@@ -1,11 +1,25 @@
 import { Grid, Text } from '@chakra-ui/react';
 import ProductCard from '../components/ProductCard/ProductCard';
+import ProductSkeleton from '../components/ProductSkeleton/ProductSkeleton';
 import { useAppSelector } from '../store/store';
 
 function Home() {
   const productsState = useAppSelector((state) => state.products);
 
-  if (productsState.loading) return <Text>Loading...</Text>;
+  const loadingElement = (
+    <>
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+      <ProductSkeleton />
+    </>
+  );
 
   if (productsState.error)
     return (
@@ -19,9 +33,11 @@ function Home() {
       p="64px 34px"
       justifyContent="center"
     >
-      {productsState.products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {productsState.loading
+        ? loadingElement
+        : productsState.products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
     </Grid>
   );
 }
