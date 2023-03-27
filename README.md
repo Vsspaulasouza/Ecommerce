@@ -17,8 +17,8 @@ Um protótipo de ecommerce feito com react, redux e typescript. O objetivo do pr
 
 ## 🎥 Preview <a name = "demo"></a>
 
-<a href="https://endereco_da_aplicaçao.com/">
-<img src="public/arquivoDePreview" alt="Ecommerce"></img>
+<a href="https://lively-gumption-17de26.netlify.app/">
+<img src="public/preview.png" alt="Ecommerce"></img>
 </a>
 
 ## ⛏️ Construído usando <a name = "built_using"></a>
@@ -33,7 +33,7 @@ Um protótipo de ecommerce feito com react, redux e typescript. O objetivo do pr
 
 Para visualizar a aplicação, acesse:
 
-- **Plataforma de hospedagem**: https://endereco_da_aplicaçao.com/
+- **Netlify**: https://lively-gumption-17de26.netlify.app/
 
 ---
 
@@ -48,7 +48,7 @@ Para executar esse projeto, você vai precisar do [Node](https://nodejs.org/pt-b
 Faça o clone do projeto e siga para seção de instalação
 
 ```shell
-gh repo clone Vsspaulasouza/Nome do projeto no github
+gh repo clone Vsspaulasouza/Ecommerce
 ```
 
 ### Instalação
